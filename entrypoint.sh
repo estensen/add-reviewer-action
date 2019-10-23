@@ -7,17 +7,21 @@ set -e
     exit 1;
 };
 
-echo "Adding $1 as reviewer"
 [ -z "${INPUT_USERNAME}" ] && {
     echo "Set the USERNAME environment variable."
     exit 1;
 };
 
+[ -z "${GITHUB_EVENT_PATH}" ] && {
+    echo "Set the GITHUB_EVENT_PATH environment variable."
+    exit 1;
+};
 
 AUTH_HEADER="Authorization: token ${GITHUB_TOKEN}"
 API_HEADER="Content-Type: application/json"
 pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
 
+echo "Adding $1 as reviewer"
 curl --request POST \
   --url "https://api.github.com/repos/$GITHUB_ACTOR/$GITHUB_REPOSITORY/pulls/$pull_number/requested_reviewers" \
   -H "{AUTH_HEADER}" \
