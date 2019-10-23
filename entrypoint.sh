@@ -20,6 +20,7 @@ set -e
 AUTH_HEADER="Authorization: token ${GITHUB_TOKEN}"
 API_HEADER="Content-Type: application/json"
 pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+echo "Pull number ${pull_number}"
 
 echo "Adding ${INPUT_USERNAME} as reviewer"
 curl --request POST \
