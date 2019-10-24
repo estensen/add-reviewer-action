@@ -26,6 +26,6 @@ echo "Adding ${INPUT_USERNAME} as reviewer to PR number ${pull_number}"
 
 curl --request POST \
   --url "$URL" \
-  -header "$AUTH_HEADER" \
-  -header "$API_HEADER" \
-  -data "{\"reviewers\":[\"$INPUT_USERNAME\"]}"
+  --header "$AUTH_HEADER" \
+  --header "$API_HEADER" \
+  --data "{\"reviewers\":[\"$INPUT_USERNAME\"]}"
