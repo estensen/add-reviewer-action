@@ -1,12 +1,14 @@
 # action.yml
 name: 'Add Reviewer'
 description: 'Add reviewer to GitHub pull request'
+author: 'estensen'
 inputs:
   username:
     description: 'GitHub username'
     required: true
+  github_token:
+    description: 'Repo token'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.username }}
