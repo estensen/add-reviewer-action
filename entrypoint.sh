@@ -28,4 +28,4 @@ curl --request POST \
   -H "{AUTH_HEADER}" \
   -H "{API_HEADER}" \
   -X POST \
-  -d "{\"reviewers\":[\"INPUT_USERNAME\"]}"
+  -d "{\"reviewers\":[\"${INPUT_USERNAME}\"]}"
