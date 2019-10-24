@@ -19,13 +19,14 @@ set -e
 
 AUTH_HEADER="Authorization: token ${GITHUB_TOKEN}"
 API_HEADER="Content-Type: application/json"
+URL="https://api.github.com/repos/${GITHUB_ACTOR}/${GITHUB_REPOSITORY}/pulls/${pull_number}/requested_reviewers"
 pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
 
 echo "Adding ${INPUT_USERNAME} as reviewer to PR number ${pull_number}"
 
 curl --request POST \
-  --url "https://api.github.com/repos/${GITHUB_ACTOR}/${GITHUB_REPOSITORY}/pulls/${pull_number}/requested_reviewers" \
-  -H "{AUTH_HEADER}" \
-  -H "{API_HEADER}" \
+  --url "$URL" \
+  -H "$AUTH_HEADER" \
+  -H "$API_HEADER" \
   -X POST \
-  -d "{\"reviewers\":[\"${INPUT_USERNAME}\"]}"
+  -d "{\"reviewers\":[\"$INPUT_USERNAME\"]}"
