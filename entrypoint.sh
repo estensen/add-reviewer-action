@@ -17,7 +17,7 @@ set -e
     exit 1;
 };
 
-AUTH_HEADER="Authorization: token ${GITHUB_TOKEN}"
+AUTH_HEADER="Authorization: token ${INPUT_GITHUB_TOKEN}"
 API_HEADER="Content-Type: application/json"
 URL="https://api.github.com/repos/${GITHUB_ACTOR}/${GITHUB_REPOSITORY}/pulls/${pull_number}/requested_reviewers"
 pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
