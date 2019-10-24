@@ -17,7 +17,7 @@ set -e
     exit 1;
 };
 
-AUTH_HEADER="Authorization: token ${INPUT_GITHUB_TOKEN}"
+AUTH_HEADER="Authorization: Bearer ${INPUT_GITHUB_TOKEN}"
 API_HEADER="Content-Type: application/json"
 URL="https://api.github.com/repos/${GITHUB_ACTOR}/${GITHUB_REPOSITORY}/pulls/${pull_number}/requested_reviewers"
 pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
@@ -26,7 +26,6 @@ echo "Adding ${INPUT_USERNAME} as reviewer to PR number ${pull_number}"
 
 curl --request POST \
   --url "$URL" \
-  -H "$AUTH_HEADER" \
-  -H "$API_HEADER" \
-  -X POST \
-  -d "{\"reviewers\":[\"$INPUT_USERNAME\"]}"
+  -header "$AUTH_HEADER" \
+  -header "$API_HEADER" \
+  -data "{\"reviewers\":[\"$INPUT_USERNAME\"]}"
