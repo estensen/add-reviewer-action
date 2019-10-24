@@ -17,10 +17,10 @@ set -e
     exit 1;
 };
 
+pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
 AUTH_HEADER="Authorization: Bearer ${INPUT_GITHUB_TOKEN}"
 API_HEADER="Content-Type: application/json"
 URL="https://api.github.com/repos/${GITHUB_ACTOR}/${GITHUB_REPOSITORY}/pulls/${pull_number}/requested_reviewers"
-pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
 
 echo "Adding ${INPUT_USERNAME} as reviewer to PR number ${pull_number}"
 
