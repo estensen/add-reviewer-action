@@ -23,6 +23,7 @@ API_HEADER="Content-Type: application/json"
 URL="https://api.github.com/repos/${GITHUB_ACTOR}/${GITHUB_REPOSITORY}/pulls/${pull_number}/requested_reviewers"
 
 echo "Adding ${INPUT_USERNAME} as reviewer to PR number ${pull_number}"
+echo "URL: ${URL}"
 
 curl --request POST \
   --url "$URL" \
